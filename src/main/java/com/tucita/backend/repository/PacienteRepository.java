@@ -1,4 +1,4 @@
-package com.tucita.backend.model.repository;
+package com.tucita.backend.repository;
 
 import org.springframework.stereotype.Repository;
 import com.tucita.backend.model.Paciente;

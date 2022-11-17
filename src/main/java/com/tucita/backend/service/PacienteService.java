@@ -12,5 +12,5 @@ public interface PacienteService {
 	public Optional<Paciente> consultarPersonaPorId(Long id);
 	public Paciente crearPaciente(Paciente paciente);
 	public Paciente actualizarPaciente(Paciente paciente);
-	public void eliminarPacientePorId(Long id);
+	public String eliminarPacientePorId(Long id);
 }

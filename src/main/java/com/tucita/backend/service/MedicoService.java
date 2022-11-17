@@ -13,5 +13,5 @@ public interface MedicoService {
 	public Optional<Medico> consultarMedicoPorId(Long id);
 	public Medico crearMedico(Medico medico);
 	public Medico actualizarMedico(Medico medico);
-	public void eliminarMedicoPorId(Long id);
+	public String eliminarMedicoPorId(Long id);
 }
