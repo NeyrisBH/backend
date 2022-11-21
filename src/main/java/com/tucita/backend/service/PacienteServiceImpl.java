@@ -2,21 +2,14 @@ package com.tucita.backend.service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Function;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.repository.query.FluentQuery.FetchableFluentQuery;
 import org.springframework.stereotype.Service;
-
 import com.tucita.backend.model.Paciente;
 import com.tucita.backend.repository.PacienteRepository;
+
 @Service
 public class PacienteServiceImpl implements PacienteService {
-	
+
 	@Autowired
 	private PacienteRepository repositorio;
 
@@ -26,7 +19,7 @@ public class PacienteServiceImpl implements PacienteService {
 	}
 
 	@Override
-	public Optional<Paciente> consultarPersonaPorId(Long id) {
+	public Optional<Paciente> consultarPacientePorId(Long id) {
 		if (id == null) {
 			return Optional.empty();
 		} else {
@@ -36,21 +29,24 @@ public class PacienteServiceImpl implements PacienteService {
 
 	@Override
 	public Paciente crearPaciente(Paciente paciente) {
-		Optional<Paciente> consultarParaCrear = repositorio.findById(paciente.getId());
+		Optional<Paciente> consultarParaCrear = repositorio.findById(paciente.getCodigoPaciente());
 		if (consultarParaCrear.isPresent()) {
-			return consultarParaCrear.get();
-		} else {
-			return repositorio.insert(paciente);
+			return null;
 		}
+		List<Paciente> pacientes = repositorio.findByNombres(paciente.getNombres());
+		if (pacientes.size() > 0) {
+			return pacientes.get(0);
+		}
+		return repositorio.insert(paciente);
 	}
 
 	@Override
 	public Paciente actualizarPaciente(Paciente paciente) {
-		Optional<Paciente> consultarParaCrear = repositorio.findById(paciente.getId());
-		if (consultarParaCrear.isPresent()) {
-			return consultarParaCrear.get();
+		Optional<Paciente> consultarParaActualizar = repositorio.findById(paciente.getCodigoPaciente());
+		if (consultarParaActualizar.isPresent()) {
+			return repositorio.save(paciente);
 		} else {
-			return repositorio.insert(paciente);
+			return null;
 		}
 	}
 
@@ -60,9 +56,7 @@ public class PacienteServiceImpl implements PacienteService {
 		if (consultarParaEliminar.isPresent()) {
 			repositorio.delete(consultarParaEliminar.get());
 			return "Registro eliminado correctamente";
-		} else {
-			return "Resgistro no encontrado, no se puede eliminar";
 		}
+		return "Resgistro no encontrado, no se puede eliminar";
 	}
-
 }

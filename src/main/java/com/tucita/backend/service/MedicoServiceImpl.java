@@ -23,8 +23,16 @@ public class MedicoServiceImpl implements MedicoService {
 	public Optional<Medico> consultarMedicoPorId(Long id) {
 		if (id == null) {
 			return Optional.empty();
-		} else {
+		}
 			return repositorio.findById(id);
+	}
+
+	@Override
+	public Optional<Medico> consultarMedicoPorArea(String area) {
+		if (area == null) {
+			return Optional.empty();
+		} else {
+			return repositorio.findByArea(area);
 		}
 	}
 
@@ -32,10 +40,13 @@ public class MedicoServiceImpl implements MedicoService {
 	public Medico crearMedico(Medico medico) {
 		Optional<Medico> consultarParaCrear = repositorio.findById(medico.getId());
 		if (consultarParaCrear.isPresent()) {
-			return consultarParaCrear.get();
-		} else {
-			return repositorio.insert(medico);
+			return null;
 		}
+		List<Medico> medicos = repositorio.findByNombres(medico.getNombres());
+		if (medicos.size() > 0) {
+			return medicos.get(0);
+		}
+		return repositorio.insert(medico);
 	}
 
 	@Override

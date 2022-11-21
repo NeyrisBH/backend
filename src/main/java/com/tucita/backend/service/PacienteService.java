@@ -9,8 +9,8 @@ import com.tucita.backend.model.Paciente;
 @Service
 public interface PacienteService {
 	public List<Paciente> consultarPacientes();
-	public Optional<Paciente> consultarPersonaPorId(Long id);
+	public Optional<Paciente> consultarPacientePorId(Long codigoPaciente);
 	public Paciente crearPaciente(Paciente paciente);
 	public Paciente actualizarPaciente(Paciente paciente);
-	public String eliminarPacientePorId(Long id);
+	public String eliminarPacientePorId(Long codigoPaciente);
 }

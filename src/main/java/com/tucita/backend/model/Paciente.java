@@ -1,43 +1,44 @@
 package com.tucita.backend.model;
 
 import java.util.Objects;
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document("pacientes")
 public class Paciente {
 	@Id
-	private Long id;
+	private Long codigoPaciente;
 	private String nombres;
 	private String primerApellido;
 	private String segundoApellido;
-	private Byte genero;
 	private Long edad;
-	private Long telefono;
-	private String correo;
+	private String direccion;
+	private String genero;
 	private Usuario usuario;
 
-	public Paciente(Long id, String nombres, String primerApellido, String segundoApellido, Byte genero, Long edad,
-			Long telefono, String correo, Usuario usuario) {
+	public Paciente() {
 		super();
-		this.id = id;
+	}
+
+	public Paciente(Long codigoPaciente, String nombres, String primerApellido, String segundoApellido, Long edad,
+			String direccion, String genero, Usuario usuario) {
+		super();
+		this.codigoPaciente = codigoPaciente;
 		this.nombres = nombres;
 		this.primerApellido = primerApellido;
 		this.segundoApellido = segundoApellido;
-		this.genero = genero;
 		this.edad = edad;
-		this.telefono = telefono;
-		this.correo = correo;
+		this.direccion = direccion;
+		this.genero = genero;
 		this.usuario = usuario;
 	}
 
-	public Long getId() {
-		return id;
+	public Long getCodigoPaciente() {
+		return codigoPaciente;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setCodigoPaciente(Long codigoPaciente) {
+		this.codigoPaciente = codigoPaciente;
 	}
 
 	public String getNombres() {
@@ -64,14 +65,6 @@ public class Paciente {
 		this.segundoApellido = segundoApellido;
 	}
 
-	public Byte getGenero() {
-		return genero;
-	}
-
-	public void setGenero(Byte genero) {
-		this.genero = genero;
-	}
-
 	public Long getEdad() {
 		return edad;
 	}
@@ -80,20 +73,20 @@ public class Paciente {
 		this.edad = edad;
 	}
 
-	public Long getTelefono() {
-		return telefono;
+	public String getDireccion() {
+		return direccion;
 	}
 
-	public void setTelefono(Long telefono) {
-		this.telefono = telefono;
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
 	}
 
-	public String getCorreo() {
-		return correo;
+	public String getGenero() {
+		return genero;
 	}
 
-	public void setCorreo(String correo) {
-		this.correo = correo;
+	public void setGenero(String genero) {
+		this.genero = genero;
 	}
 
 	public Usuario getUsuario() {
@@ -106,7 +99,7 @@ public class Paciente {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(correo, edad, genero, id, nombres, primerApellido, segundoApellido, telefono, usuario);
+		return Objects.hash(codigoPaciente, direccion, edad, genero, nombres, primerApellido, segundoApellido, usuario);
 	}
 
 	@Override
@@ -118,17 +111,16 @@ public class Paciente {
 		if (getClass() != obj.getClass())
 			return false;
 		Paciente other = (Paciente) obj;
-		return Objects.equals(correo, other.correo) && Objects.equals(edad, other.edad)
-				&& Objects.equals(genero, other.genero) && Objects.equals(id, other.id)
+		return Objects.equals(codigoPaciente, other.codigoPaciente) && Objects.equals(direccion, other.direccion)
+				&& Objects.equals(edad, other.edad) && Objects.equals(genero, other.genero)
 				&& Objects.equals(nombres, other.nombres) && Objects.equals(primerApellido, other.primerApellido)
-				&& Objects.equals(segundoApellido, other.segundoApellido) && Objects.equals(telefono, other.telefono)
-				&& Objects.equals(usuario, other.usuario);
+				&& Objects.equals(segundoApellido, other.segundoApellido) && Objects.equals(usuario, other.usuario);
 	}
 
 	@Override
 	public String toString() {
-		return "Paciente [id=" + id + ", nombres=" + nombres + ", primerApellido=" + primerApellido
-				+ ", segundoApellido=" + segundoApellido + ", genero=" + genero + ", edad=" + edad + ", telefono="
-				+ telefono + ", correo=" + correo + ", usuario=" + usuario + "]";
+		return "Paciente [codigoPaciente=" + codigoPaciente + ", nombres=" + nombres + ", primerApellido="
+				+ primerApellido + ", segundoApellido=" + segundoApellido + ", edad=" + edad + ", direccion="
+				+ direccion + ", genero=" + genero + ", usuario=" + usuario + "]";
 	}
 }

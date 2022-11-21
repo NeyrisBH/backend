@@ -1,24 +1,31 @@
 package com.tucita.backend.model;
 
 import java.util.Objects;
-
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document("citas")
 public class Cita {
+	@Id
 	private Long id;
 	private String fecha;
 	private String hora;
 	private String area;
-	private Medico medico;
+	private Long medicoId;
+	private Long pacienteId;
 
-	public Cita(Long id, String fecha, String hora, String area, Medico medico) {
+	public Cita() {
+		super();
+	}
+
+	public Cita(Long id, String fecha, String hora, String area, Long medico, Long paciente) {
 		super();
 		this.id = id;
 		this.fecha = fecha;
 		this.hora = hora;
 		this.area = area;
-		this.medico = medico;
+		this.medicoId = medico;
+		this.pacienteId = paciente;
 	}
 
 	public Long getId() {
@@ -53,17 +60,25 @@ public class Cita {
 		this.area = area;
 	}
 
-	public Medico getMedico() {
-		return medico;
+	public Long getMedicoId() {
+		return medicoId;
 	}
 
-	public void setMedico(Medico medico) {
-		this.medico = medico;
+	public void setMedicoId(Long medicoId) {
+		this.medicoId = medicoId;
+	}
+
+	public Long getPacienteId() {
+		return pacienteId;
+	}
+
+	public void setPacienteId(Long pacienteId) {
+		this.pacienteId = pacienteId;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(area, fecha, hora, id, medico);
+		return Objects.hash(area, fecha, hora, id, medicoId, pacienteId);
 	}
 
 	@Override
@@ -77,11 +92,12 @@ public class Cita {
 		Cita other = (Cita) obj;
 		return Objects.equals(area, other.area) && Objects.equals(fecha, other.fecha)
 				&& Objects.equals(hora, other.hora) && Objects.equals(id, other.id)
-				&& Objects.equals(medico, other.medico);
+				&& Objects.equals(medicoId, other.medicoId) && Objects.equals(pacienteId, other.pacienteId);
 	}
 
 	@Override
 	public String toString() {
-		return "Cita [id=" + id + ", fecha=" + fecha + ", hora=" + hora + ", area=" + area + ", medico=" + medico + "]";
+		return "Cita [id=" + id + ", fecha=" + fecha + ", hora=" + hora + ", area=" + area + ", medicoId=" + medicoId
+				+ ", pacienteId=" + pacienteId + "]";
 	}
 }

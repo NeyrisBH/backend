@@ -8,8 +8,9 @@ import com.tucita.backend.model.Usuario;
 @Service
 public interface UsuarioService {
 	public List<Usuario> consultarUsuarios();
-	public Optional<Usuario> consultarUsuarioPorId(Long id);
+	public Optional<Usuario> consultarUsuario(Long id, String usuario);
+	public Optional<Usuario> consultarUsuarioPorRol(String rol);
 	public Usuario crearUsuario(Usuario usuario);
 	public Usuario actualizarUsuario(Usuario usuario);
-	public void eliminarUsuarioPorId(Long id);
+	public String eliminarUsuarioPorId(Long id);
 }
